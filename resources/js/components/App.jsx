@@ -3,6 +3,7 @@ import {getClients, getRequests, getSummary} from '../api';
 import Filters from './Filters';
 import RequestList from './RequestList';
 import Summary from './Summary';
+import RequestForm from "./RequestForm";
 
 export default function App(){
     const [clients, setClients] = useState([]);
@@ -58,9 +59,16 @@ export default function App(){
         loadSummary();
     }, [filters.client_id]);
 
+    function handleCreated(){
+        loadRequests();
+        loadSummary();
+    }
+
     return (
         <div className="container">
             <h1>Client Requests</h1>
+
+            <RequestForm clients={clients} onCreated={handleCreated} />
 
             <Summary summary={summary} />
 

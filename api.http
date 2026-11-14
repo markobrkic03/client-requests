@@ -1,0 +1,63 @@
+### 1. High priority zahtev sa rokom, koji je isparavan treba da vrati 201
+POST http://127.0.0.1:8000/api/requests
+Content-Type: application/json
+Accept: application/json
+
+{
+    "client_id" : 1,
+    "title" : "Test zahtev sa rokom",
+    "priority" : "high",
+    "due_date" : "2026-12-01"
+}
+
+
+### 2. High priority bez roka, treba da vrati -> 422, zbog greske sa due_date
+POST http://127.0.0.1:8000/api/requests
+Content-Type: application/json
+Accept: application/json
+
+{
+    "client_id" : 1,
+    "title" : "High priority bez roka",
+    "priority" : "high"
+}
+
+### 3. Prekratak naslov treba da baci gresku za naslov(title) -> 422
+POST 127.0.0.1:8000/api/requests
+Content-Type: application/json
+Accept: application/json
+
+{
+    "client_id" : 1,
+    "title" : "aa",
+    "priority" : "low"
+}
+
+### 4. Nepostojeci klijent, baca se greska 422, zbog client_id
+POST 127.0.0.1:8000/api/requests
+Content-Type: application/json
+Accept: application/json
+
+{
+    "client_id" : 999,
+    "title" : "Neppostojeci klijent",
+    "priority" : "low"
+}
+
+### 5. Kada saljemo prazno telo, 422 sa 3 greske -> client_id, title i priority
+POST 127.0.0.1:8000/api/requests
+Content-Type: application/json
+Accept: application/json
+
+{}
+
+### 6. Low priority koji nema rok -> treba da se vrati 201
+POST 127.0.0.1:8000/api/requests
+Content-Type: application/json
+Accept: application/json
+
+{
+    "client_id" : 2,
+    "title" : "Obican zahtev sa low priority koji nema rok",
+    "priority" : "low"
+}

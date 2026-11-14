@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreClientRequestRequest;
 use App\Models\ClientRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -52,4 +53,17 @@ class ClientRequestController extends Controller
             'done' => $counts['done'] ?? 0
         ];
     }
+
+
+    public function store(StoreClientRequestRequest $request){
+
+        $clientRequest = ClientRequest::create($request->validated());
+
+        $clientRequest->refresh();
+        $clientRequest->load('client:id,name');
+
+        return response()->json($clientRequest, 201);
+
+    }
+
 }

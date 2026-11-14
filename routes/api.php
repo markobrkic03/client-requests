@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/clients', [ClientController::class, 'index']);
 Route::get('/requests/summary', [ClientRequestController::class, 'summary']);
 Route::get('/requests', [ClientRequestController::class,'index']);
+Route::post('/requests', [ClientRequestController::class, 'store']);
 
 
 

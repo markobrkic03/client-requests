@@ -61,6 +61,24 @@ export async function createRequest(data){
 
 }
 
+export async function updateRequestStatus(id, data){
+    const result = await fetch(`/api/requests/${id}`, {
+        method: 'PATCH',
+        headers,
+        body: JSON.stringify(data),
+    });
+
+    if(result.status === 422){
+        const body = await result.json();
+        return { ok: false, errors: body.errors };
+    }
+
+    if(!result.ok)
+        throw new Error("Greska pri promeni statusa");
+
+    return { ok:true, data: await  result.json()};
+}
+
 
 
 

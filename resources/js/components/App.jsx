@@ -59,7 +59,7 @@ export default function App(){
         loadSummary();
     }, [filters.client_id]);
 
-    function handleCreated(){
+    function refreshData(){
         loadRequests();
         loadSummary();
     }
@@ -68,7 +68,7 @@ export default function App(){
         <div className="container">
             <h1>Client Requests</h1>
 
-            <RequestForm clients={clients} onCreated={handleCreated} />
+            <RequestForm clients={clients} onCreated={refreshData} />
 
             <Summary summary={summary} />
 
@@ -76,7 +76,7 @@ export default function App(){
 
             {loading && <p>Ucitavanje...</p>}
             {error && <p className="error">{error}</p>}
-            {!loading && !error && <RequestList requests={requests} />}
+            {!loading && !error && <RequestList requests={requests} onUpdated={refreshData}/>}
         </div>
     )
 

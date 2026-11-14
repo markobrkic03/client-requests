@@ -1,9 +1,84 @@
-@import 'tailwindcss';
+body {
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    background: #f5f6f8;
+    color: #222;
+}
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px;
+}
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+.card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+.error {
+    color: #b00020;
+}
+
+.field-error {
+    color: #b00020;
+    font-size: 0.85em;
+    margin: 4px 0 0;
+}
+
+.summary {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.summary div {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+}
+
+.summary strong {
+    display: block;
+    font-size: 1.8em;
+}
+
+.filters, .form-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+label {
+    display: block;
+    font-size: 0.9em;
+}
+
+input, select, textarea, button {
+    font: inherit;
+    padding: 6px 8px;
+}
+
+button {
+    cursor: pointer;
 }

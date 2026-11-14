@@ -70,7 +70,7 @@ Test koristi posebnu bazu `client_requests_test` (podešeno u `phpunit.xml`), pa
 
 ## Utrošeno vreme
 
-Ukupno otprilike 11 sati aktivnog rada, u delovima tokom tri dana (12–14. novembar):
+Ukupno otprilike 11 sati aktivnog rada, u delovima tokom tri dana (12-14. novembar):
 
 - Instalacija i Docker (Postgres, docker-compose, baze): ~1,5 h
 - Backend: Laravel projekat, migracije, modeli, seed, API, validacija, feature test: ~4,5 h
@@ -86,8 +86,8 @@ prvi put radio sa Postgresom (CHECK ograničenja, ILIKE, test baza na Postgresu)
 
 Glavni upiti u aplikaciji filtriraju po klijentu, a onda po statusu:
 
-- Lista: `GET /api/requests?client_id=1&status=open` → `WHERE client_id = ? AND status = ?`
-- Summary za klijenta: `GET /api/requests/summary?client_id=1` → `WHERE client_id = ? GROUP BY status`
+- Lista: `GET /api/requests?client_id=1&status=open` => `WHERE client_id = ? AND status = ?`
+- Summary za klijenta: `GET /api/requests/summary?client_id=1` => `WHERE client_id = ? GROUP BY status`
 
 Složeni indeks (client_id, status) pokriva oba slučaja. Pošto je `client_id` prva kolona,
 indeks se koristi i kad se filtrira samo po klijentu, a ne samo kad su zadata oba filtera.
@@ -106,7 +106,7 @@ to brže za tako malo redova. Indeks ima efekta kad zahteva ima mnogo.
 
 ## SQL za summary
 
-`GET /api/requests/summary?client_id=3` — u `ClientRequestController@summary` upit se gradi ovako:
+`GET /api/requests/summary?client_id=3` - u `ClientRequestController@summary` upit se gradi ovako:
 
 ```php
 $query = ClientRequest::selectRaw('status, count(*) as total')

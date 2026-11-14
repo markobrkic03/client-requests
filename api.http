@@ -61,3 +61,81 @@ Accept: application/json
     "title" : "Obican zahtev sa low priority koji nema rok",
     "priority" : "low"
 }
+
+### 7. Prebaciti u in_progress -> ocekivano 200
+PATCH http://127.0.0.1:8000/api/requests/6
+Content-Type: application/json
+Accept: application/json
+
+{
+    "status" : "in_progress"
+}
+
+### 8. Done status koji nema resolution -> greska 422, jer done mora imati resolution
+PATCH http://127.0.0.1:8000/api/requests/6
+Content-Type: application/json
+Accept: application/json
+
+{
+    "status" : "done"
+}
+
+### 9. Done koji ima resolution ali je resolution prekratak -> 422, jer je min 10 karaktera
+PATCH http://127.0.0.1:8000/api/requests/6
+Content-Type: application/json
+Accept: application/json
+
+{
+    "status" : "done",
+    "resolution" : "kratko"
+}
+
+### 10. Done status koji ima ispravan resolution -> vraca 200
+PATCH http://127.0.0.1:8000/api/requests/6
+Content-Type: application/json
+Accept: application/json
+
+{
+    "status" : "done",
+    "resolution" : "Dodat novi cenovnik za decembar"
+}
+
+### 11. Nepostojeci zahtev -> treba da vrati 404
+PATCH http://127.0.0.1:8000/api/requests/999
+Content-Type: application/json
+Accept: application/json
+
+{
+    "status" : "in_progress"
+}
+
+### 12. Nedozvoljen status -> treba 422, greska za status
+PATCH http://127.0.0.1:8000/api/requests/6
+Content-Type: application/json
+Accept: application/json
+
+{
+    "status" : "zatvoreno"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

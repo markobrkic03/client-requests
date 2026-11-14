@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreClientRequestRequest;
+use App\Http\Requests\UpdateClientRequestStatusRequest;
 use App\Models\ClientRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -63,6 +64,16 @@ class ClientRequestController extends Controller
         $clientRequest->load('client:id,name');
 
         return response()->json($clientRequest, 201);
+
+    }
+
+    public function update(UpdateClientRequestStatusRequest $request, ClientRequest $clientRequest){
+
+        $clientRequest->update($request->validated());
+
+        $clientRequest->load('client:id,name');
+
+        return response()->json($clientRequest, 200);
 
     }
 
